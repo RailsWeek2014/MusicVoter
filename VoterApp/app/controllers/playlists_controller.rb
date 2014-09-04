@@ -1,15 +1,20 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
 
-  # GET /playlists
+  # GET /playlists<<<<
   # GET /playlists.json
   def index
     @playlists = current_user.playlists.all
   end
 
   def list_tracks
-    @playlist = Playlist.find_by_code(params[:code])
-    @tracks = @playlist.tracks.sort_by { |votes|}
+    if params[:code]
+      @playlist = Playlist.find_by_code(params[:code])
+    else
+      @playlist = Playlist.find( params[:id])
+    end
+    @tracks = @playlist.tracks.order(votes: :asc)
+    @track = Track.new(playlist: @playlist)
   end
   # GET /playlists/1
   # GET /playlists/1.json

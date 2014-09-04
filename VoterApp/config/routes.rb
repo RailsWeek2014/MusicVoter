@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :playlists
   post "playlists/list_tracks" => "playlists#list_tracks"
+  get "playlists/list_tracks/:id" => "playlists#list_tracks", as: "list_tracks"
   get "pages/beitreten" => "pages#beitreten", as:  "playlists_beitreten"
   root to: "pages#home"
   # The priority is based upon order of creation: first created -> highest priority.

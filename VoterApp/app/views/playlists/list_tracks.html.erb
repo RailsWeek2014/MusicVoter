@@ -1,10 +1,7 @@
 <h1>Track Liste - <%= @playlist.title%></h1>
 <h2><%= @playlist.beschreibung%></h2>
-<%= form_tag("tracks", method: "post") do %>
-    <%= label_tag(:q, "Search for:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-<% end %>
+<%= render partial: 'tracks/form' %>
+
 <ul>
   <% @tracks.each do |track| %>
       <li><%= track.url %></li>
