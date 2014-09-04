@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
-    <p><%= link_to "Meine Bookmarks", playlists_path %></p>
+    <p><%= link_to "Meine Playlists", playlists_path %></p>
+    <p><%= link_to "Playlist beitreten", playlists_path %></p>
     <p><%= link_to "Abmelden", destroy_user_session_url, method: :delete %></p>
 <% else %>
     <p><%= link_to "Benutzerkonto erstellen", new_user_registration_path %></p>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904114318) do
+ActiveRecord::Schema.define(version: 20140904120729) do
 
   create_table "playlists", force: true do |t|
     t.string   "title"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20140904114318) do
   end
 
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"
+
+  create_table "tracks", force: true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.float    "length"
+    t.integer  "votes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "playlist_id"
+    t.integer  "user_id"
+  end
+
+  add_index "tracks", ["playlist_id"], name: "index_tracks_on_playlist_id"
+  add_index "tracks", ["user_id"], name: "index_tracks_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
