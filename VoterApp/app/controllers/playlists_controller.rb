@@ -7,6 +7,10 @@ class PlaylistsController < ApplicationController
     @playlists = current_user.playlists.all
   end
 
+  def list_tracks
+    @playlist = Playlist.find_by_code(params[:code])
+    @tracks = @playlist.tracks.sort_by { |votes|}
+  end
   # GET /playlists/1
   # GET /playlists/1.json
   def show
