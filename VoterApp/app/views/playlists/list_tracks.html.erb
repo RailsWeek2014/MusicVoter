@@ -1,9 +1,17 @@
-<h1>Track Liste - <%= @playlist.title%></h1>
-<h2><%= @playlist.beschreibung%></h2>
+<h2>Track Liste - <%= @playlist.title%></h2>
+<h3><%= @playlist.beschreibung%></h3>
 <%= render partial: 'tracks/form' %>
-
-<ul>
+<table>
+  <tr>
+    <td>Title</td>
+    <td>votes</td>
+    <td></td>
+  </tr>
   <% @tracks.each do |track| %>
-      <li><%= track.url %></li>
+      <tr>
+        <td><%= track.title %></td>
+        <td><%= track.votes %></td>
+        <td><%= link_to "voting", voting_path %></td>
+      </tr>
   <% end %>
-</ul>
+</table>

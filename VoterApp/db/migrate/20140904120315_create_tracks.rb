@@ -4,7 +4,7 @@ class CreateTracks < ActiveRecord::Migration
       t.string :title
       t.string :url
       t.float :length
-      t.integer :votes
+      t.integer :votes, default: 0
 
       t.timestamps
     end
