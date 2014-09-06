@@ -35,8 +35,8 @@ class VoteTracksController < ApplicationController
         flash[:notice] = "Du hast erfolgreich gevotet"
         redirect_to list_tracks_path(@vote_track.track.playlist)
       else
-        flash[:notice] = "Hat nicht funktioniert"
-        list_tracks_path(@vote_track.track.playlist)
+        format.html { render :new }
+
       end
 
     end

@@ -13,7 +13,7 @@ class PlaylistsController < ApplicationController
     else
       @playlist = Playlist.find( params[:id])
     end
-    @tracks = @playlist.tracks.order(votes: :asc)
+    @tracks = @playlist.tracks.order(votes: :desc, title: :asc)
     @track = Track.new(playlist: @playlist)
   end
   # GET /playlists/1
@@ -60,6 +60,8 @@ class PlaylistsController < ApplicationController
       end
     end
   end
+  
+
 
   # DELETE /playlists/1
   # DELETE /playlists/1.json
@@ -69,6 +71,11 @@ class PlaylistsController < ApplicationController
       format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  public
+  def get_mostvoted_track id
+    @playlist = Playlist.find(id)
+    @playlist.tracks.order(votes: :desc, title: :asc)
   end
 
   private

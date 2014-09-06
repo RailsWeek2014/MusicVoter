@@ -51,6 +51,10 @@ class PlayersController < ApplicationController
     end
   end
 
+  def play
+      @player = Player.where(playlist_id: params[:playlist_id])[0]
+      @mostvoted = @player.playlist
+  end
   # DELETE /players/1
   # DELETE /players/1.json
   def destroy

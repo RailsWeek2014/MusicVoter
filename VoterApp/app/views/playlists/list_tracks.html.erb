@@ -2,7 +2,7 @@
 <h3><%= @playlist.beschreibung%></h3>
 <%= render partial: 'tracks/form' %>
 <% if current_user == @playlist.user %>
-    <p><%= link_to "Player", playlists_path %></p>
+    <p><%= link_to "Player", playmusic_path(@playlist) %></p>
 
 <% end %>
 <table>
