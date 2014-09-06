@@ -1,4 +1,4 @@
-class Vote < ActiveRecord::Base
+class VoteTrack < ActiveRecord::Base
   belongs_to :user
   belongs_to :track
   validates :user_id, :track_id, uniqueness: true

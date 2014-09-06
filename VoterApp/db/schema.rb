@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904143058) do
+ActiveRecord::Schema.define(version: 20140906135424) do
+
+  create_table "players", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "playlist_id"
+  end
+
+  add_index "players", ["playlist_id"], name: "index_players_on_playlist_id"
 
   create_table "playlists", force: true do |t|
     t.string   "title"
@@ -28,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140904143058) do
     t.string   "title"
     t.string   "url"
     t.float    "length"
-    t.integer  "votes"
+    t.integer  "votes",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "playlist_id"
@@ -56,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140904143058) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "votes", force: true do |t|
+  create_table "vote_tracks", force: true do |t|
     t.integer  "user_id"
     t.integer  "track_id"
     t.datetime "created_at"

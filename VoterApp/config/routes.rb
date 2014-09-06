@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  resources :vote_tracks
+
+  resources :track_votes
+
+  resources :players
+
+  get "vote_track/:user_id/:track_id" => "vote_tracks#create", as: "voting"
   resources :votes
 
   resources :tracks
@@ -8,7 +16,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :playlists
   post "playlists/list_tracks" => "playlists#list_tracks"
-  get "playlists/vote" => "votes#create", as: "voting"
   get "playlists/list_tracks/:id" => "playlists#list_tracks", as: "list_tracks"
   get "pages/beitreten" => "pages#beitreten", as:  "playlists_beitreten"
   root to: "pages#home"
