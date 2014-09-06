@@ -53,7 +53,7 @@ class PlayersController < ApplicationController
 
   def play
       @player = Player.where(playlist_id: params[:playlist_id])[0]
-      @mostvoted = @player.playlist
+      @mostvoted = @player.playlist.tracks.order(votes: :desc, title: :asc)[0]
   end
   # DELETE /players/1
   # DELETE /players/1.json

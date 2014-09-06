@@ -1,6 +1,18 @@
 <h2>Track Liste - <%= @playlist.title%></h2>
 <h3><%= @playlist.beschreibung%></h3>
 <%= render partial: 'tracks/form' %>
+<div class="tab-pane active" id="search">
+
+  <div class="tab-pane active" id="search">
+
+    <div data-role="content">
+      <div data-role="fieldcontain">
+        <input name="" id="youtbe_search" placeholder="Search Youtube" value="" type="search">
+      </div>
+
+      <div class="search_tracklist"></div>
+      <button class="btn-lg" id="send_track_but" value="Submit" type="submit">Send</button>
+    </div>
 <% if current_user == @playlist.user %>
     <p><%= link_to "Player", playmusic_path(@playlist) %></p>
 
