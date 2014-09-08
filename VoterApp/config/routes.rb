@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'videos/client'
+
+  get 'videos/details'
+
+
   resources :vote_tracks
 
   resources :track_votes
 
   resources :players
+
+  get "tracks/suggest/:title/:url/:playlist_id" => "tracks#suggest", as: "suggest"
 
   get "vote_track/:user_id/:track_id" => "vote_tracks#create", as: "voting"
   get "player/play/:playlist_id" => "players#play", as: "playmusic"
@@ -16,6 +23,10 @@ Rails.application.routes.draw do
   get 'pages/home'
 
   devise_for :users
+  get 'videos/index'
+  post 'videos/index'
+  get 'videos/:id' => 'videos#details', as: :details
+
 
   resources :playlists
   post "playlists/list_tracks" => "playlists#list_tracks"

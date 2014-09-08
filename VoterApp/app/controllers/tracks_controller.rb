@@ -36,6 +36,14 @@ class TracksController < ApplicationController
     end
   end
 
+  def suggest
+    @track = Track.new(title: params[:title], url: params[:url], playlist_id: params[:playlist_id])
+      if @track.save
+        redirect_to list_tracks_path(@track.playlist)
+      else
+         render :new
+      end
+  end
   # PATCH/PUT /tracks/1
   # PATCH/PUT /tracks/1.json
   def update
