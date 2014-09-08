@@ -1,5 +1,8 @@
+<div id="test">
 <h2>Play - <%= @player.playlist.title %> </h2>
 <h3>Mostvoted Track - <%= @mostvoted.title%></h3>
+<input type="button" value="Next Track" onClick="document.location.reload(true)">
+<br />
 <div id="player"></div>
 
 <script>
@@ -36,7 +39,10 @@
     var done = false;
     function onPlayerStateChange(event) {
         if(event.data === 0) {
-            alert('done');
+            <% @mostvoted.votes = 0 %>
+            <% @mostvoted.save %>
+            <% @mostvoted.vote_tracks.delete_all %>
+            window.location.reload();
         }
     }
     function stopVideo() {

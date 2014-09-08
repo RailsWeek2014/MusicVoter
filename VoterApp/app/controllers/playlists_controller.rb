@@ -13,7 +13,7 @@ class PlaylistsController < ApplicationController
     else
       @playlist = Playlist.find( params[:id])
     end
-    @tracks = @playlist.tracks.order(votes: :desc, title: :asc)
+    @tracks = @playlist.tracks.order(title: :asc)
     @track = Track.new(playlist: @playlist)
   end
   # GET /playlists/1
@@ -75,7 +75,7 @@ class PlaylistsController < ApplicationController
   public
   def get_mostvoted_track id
     @playlist = Playlist.find(id)
-    @playlist.tracks.order(votes: :desc, title: :asc)
+    @playlist.tracks.order(votes: :desc)
   end
 
   private

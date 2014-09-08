@@ -31,7 +31,7 @@ ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
                             var final="<div id='title'>"+video_title+"</div><div>"+video_frame+"</div><div id='count'>"+video_viewCount+" Views</div>" +
                                     "<div id='suggest track'>" +
-                                    "<a href='/tracks/suggest/"+video_title+"/"+video_id+"/<%= @playlist.id %>'>suggest track</a></div>";
+                                    "<a href='/tracks/suggest/"+encodeURIComponent(video_title.substr(0,15))+"/"+video_id+"/<%= @playlist.id %>'>suggest track</a></div>";
                             $("#result").html(final); // Result
 
                         });
