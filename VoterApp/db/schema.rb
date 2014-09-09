@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140906135424) do
   create_table "playlists", force: true do |t|
     t.string   "title"
     t.string   "code"
-    t.text     "beschreibung"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(version: 20140906135424) do
 
   create_table "tracks", force: true do |t|
     t.string   "title"
-    t.string   "url"
-    t.float    "length"
+    t.string   "youtube_id"
     t.integer  "votes",       default: 0
+    t.boolean  "accept",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "playlist_id"

@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <td>Title</td>
+    <td>votes</td>
+    <td>Links</td>
+  </tr>
+  <% @tracks.each do |track| %>
+      <tr>
+        <td><%= track.title %></td>
+        <td><%= track.votes %></td>
+        <% if VoteTrack.find_by_track_id_and_user_id(track.id, current_user.id) %>
+            <td><p>Already voted</p></td>
+        <% else %>
+            <td><%= link_to 'voting', voting_path(current_user, track)%></td>
+        <% end %>
+
+      </tr>
+  <% end %>
+</table>
+

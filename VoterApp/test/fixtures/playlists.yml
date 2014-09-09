@@ -3,9 +3,9 @@
 one:
   title: MyString
   code: MyString
-  beschreibung: MyText
+  description: MyText
 
 two:
   title: MyString
   code: MyString
-  beschreibung: MyText
+  description: MyText

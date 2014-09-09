@@ -1,21 +1,40 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
 
-  # GET /playlists<<<<
-  # GET /playlists.json
-  def index
-    @playlists = current_user.playlists.all
-  end
-
+  #meine methoden
   def list_tracks
     if params[:code]
       @playlist = Playlist.find_by_code(params[:code])
     else
       @playlist = Playlist.find( params[:id])
     end
-    @tracks = @playlist.tracks.order(title: :asc)
-    @track = Track.new(playlist: @playlist)
+    if @playlist.nil?
+      redirect_to :back, :flash => { :alert => "No Playlist with this Code" }
+    end
   end
+
+  def waitlist
+    @playlist = Playlist.find(params[:id])
+    @tracks = @tracks = @playlist.tracks.order(title: :asc).where(accept: false)
+    render layout: false
+  end
+
+  def tracklist
+    @playlist = Playlist.find(params[:id])
+    @tracks = @playlist.tracks.order(title: :asc).where(accept: true)
+    render layout: false
+  end
+  def top5
+    @playlist = Playlist.find(params[:id])
+    @tracks = @playlist.tracks.order(votes: :desc).where(accept: true)[1..5]
+    render layout: false
+  end
+  # GET /playlists<<<<
+  # GET /playlists.json
+  def index
+    @playlists = current_user.playlists.all
+  end
+
   # GET /playlists/1
   # GET /playlists/1.json
   def show
@@ -86,6 +105,6 @@ class PlaylistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
-      params.require(:playlist).permit(:title, :code, :beschreibung)
+      params.require(:playlist).permit(:title, :code, :description)
     end
 end

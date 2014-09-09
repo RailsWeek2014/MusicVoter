@@ -1,6 +1,24 @@
 class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
 
+  def suggest
+    @track = Track.new(title: params[:title], youtube_id: params[:youtube_id], playlist_id: params[:playlist_id])
+    if @track.save
+      redirect_to list_tracks_path(@track.playlist)
+    else
+      redirect_to :back
+    end
+  end
+
+  def accept
+    @track = Track.find(params[:id])
+    @track.accept = true
+    if @track.save
+      redirect_to list_tracks_path(@track.playlist)
+    else
+      redirect_to :back
+    end
+  end
   # GET /tracks
   # GET /tracks.json
   def index
@@ -25,9 +43,10 @@ class TracksController < ApplicationController
   # POST /tracks.json
   def create
     @track = Track.new(track_params)
+
     respond_to do |format|
       if @track.save
-        format.html { redirect_to list_tracks_path(@track.playlist), notice: 'Track was successfully created.' }
+        format.html { redirect_to @track, notice: 'Track was successfully created.' }
         format.json { render :show, status: :created, location: @track }
       else
         format.html { render :new }
@@ -36,14 +55,6 @@ class TracksController < ApplicationController
     end
   end
 
-  def suggest
-    @track = Track.new(title: params[:title], url: params[:url], playlist_id: params[:playlist_id])
-      if @track.save
-        redirect_to list_tracks_path(@track.playlist)
-      else
-         render :new
-      end
-  end
   # PATCH/PUT /tracks/1
   # PATCH/PUT /tracks/1.json
   def update
@@ -61,11 +72,10 @@ class TracksController < ApplicationController
   # DELETE /tracks/1
   # DELETE /tracks/1.json
   def destroy
+    @track = Track.find(params[:id])
+    @playlist = @track.playlist
     @track.destroy
-    respond_to do |format|
-      format.html { redirect_to tracks_url, notice: 'Track was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to list_tracks_path(@playlist)
   end
 
   private
@@ -76,6 +86,6 @@ class TracksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def track_params
-      params.require(:track).permit(:title, :url, :length, :playlist_id)
+      params.require(:track).permit(:title, :youtube_id, :votes, :accept)
     end
 end

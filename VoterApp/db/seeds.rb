@@ -6,4 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create!(email: "aladin@atalla.de", password: "12345678")
-Playlist.create!(title: "Meine erste Playlist", code: "2133", beschreibung:"Beschreibung", user: User.find(1))
+Playlist.create!(title: "Meine erste Playlist", code: "2133", description:"description", user: User.find(1))

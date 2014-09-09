@@ -1,17 +1,14 @@
 Rails.application.routes.draw do
 
-  get 'videos/client'
-
-  get 'videos/details'
-
-
   resources :vote_tracks
 
   resources :track_votes
 
   resources :players
 
-  get "tracks/suggest/:title/:url/:playlist_id" => "tracks#suggest", as: "suggest"
+  get "tracks/destroy/:id" => "tracks#destroy", as: "destroytrack"
+
+  get "tracks/suggest/:title/:youtube_id/:playlist_id" => "tracks#suggest", as: "suggest"
 
   get "vote_track/:user_id/:track_id" => "vote_tracks#create", as: "voting"
   get "player/play/:playlist_id" => "players#play", as: "playmusic"
@@ -27,12 +24,16 @@ Rails.application.routes.draw do
   post 'videos/index'
   get 'videos/:id' => 'videos#details', as: :details
 
+  get "playlists/waitlist/:id" => "playlists#waitlist", as: "waitlist"
+  get "playlists/tracklist/:id" => "playlists#tracklist", as: "tracklist"
+  get "playlists/top5/:id" => "playlists#top5", as: "top5"
 
+  get "tracks/accept/:id" => "tracks#accept", as: "accept"
   resources :playlists
   post "playlists/list_tracks" => "playlists#list_tracks"
   get "playlists/list_tracks/:id" => "playlists#list_tracks", as: "list_tracks"
-  get "pages/beitreten" => "pages#beitreten", as:  "playlists_beitreten"
-  root to: "pages#home", as: "home"
+  get "pages/enter" => "pages#enter", as:  "playlists_enter"
+  root to: "pages#home", as: "root"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

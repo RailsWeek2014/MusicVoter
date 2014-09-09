@@ -2,12 +2,12 @@
 
 one:
   title: MyString
-  url: MyString
-  length: 1.5
+  youtube_id: MyString
   votes: 1
+  accept: false
 
 two:
   title: MyString
-  url: MyString
-  length: 1.5
+  youtube_id: MyString
   votes: 1
+  accept: false

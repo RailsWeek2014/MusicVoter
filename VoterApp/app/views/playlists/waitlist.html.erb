@@ -1,0 +1,18 @@
+<h2>waitlist</h2>
+<table>
+  <tr>
+    <td>Title</td>
+    <td>youtube-link</td>
+
+  </tr>
+  <% @tracks.each do |track| %>
+      <tr>
+        <td><%= track.title %></td>
+        <td><%= link_to 'youtube-link', "http://www.youtube.com/watch?v="+track.youtube_id %></td>
+        <td><%= link_to 'Accept', accept_path(track) %>
+            ||
+          <%= link_to 'Refuse', destroytrack_path(track), method: :delete %>
+        </td>
+      </tr>
+  <% end %>
+</table>

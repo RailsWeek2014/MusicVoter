@@ -32,7 +32,7 @@ class VoteTracksController < ApplicationController
         track = @vote_track.track
         track.votes += 1
         track.save!
-        flash[:notice] = "Du hast erfolgreich gevotet"
+        flash[:notice] = "You vote was successful"
         redirect_to list_tracks_path(@vote_track.track.playlist)
       else
         format.html { render :new }

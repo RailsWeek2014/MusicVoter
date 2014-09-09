@@ -1,0 +1,5 @@
+<%# add navigation links to this file %>
+<% if user_signed_in? %>
+    <%= link_to "My Playlists", playlists_path %>
+    <%= link_to "Enter Playlist", playlists_enter_path %>
+<% end %>

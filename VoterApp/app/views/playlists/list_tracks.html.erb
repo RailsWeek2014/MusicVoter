@@ -3,6 +3,47 @@ ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function()
     {
+        var refreshId = setInterval(function() {
+            $.ajax
+            ({
+                type: "GET",
+                url: "/playlists/tracklist/<%= @playlist.id %>",
+                dataType:"html",
+                success: function(data)
+                {
+                    console.log(data)
+                    $("#tracklist").html(data); // Result
+
+
+                }
+            });
+            $.ajax
+            ({
+                type: "GET",
+                url: "/playlists/top5/<%= @playlist.id %>",
+                dataType:"html",
+                success: function(data)
+                {
+                    console.log(data)
+                    $("#top5").html(data); // Result
+
+
+                }
+            });
+            $.ajax
+            ({
+                type: "GET",
+                url: "/playlists/waitlist/<%= @playlist.id %>",
+                dataType:"html",
+                success: function(data)
+                {
+                    console.log(data)
+                    $("#waitlist").html(data); // Result
+
+
+                }
+            });
+        }, 1000);
 
         $(".search_input").keyup(function()
         {
@@ -31,7 +72,7 @@ ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
                             var final="<div id='title'>"+video_title+"</div><div>"+video_frame+"</div><div id='count'>"+video_viewCount+" Views</div>" +
                                     "<div id='suggest track'>" +
-                                    "<a href='/tracks/suggest/"+encodeURIComponent(video_title.substr(0,15))+"/"+video_id+"/<%= @playlist.id %>'>suggest track</a></div>";
+                                    "<a href='/tracks/suggest/"+encodeURIComponent(video_title.substr(0,20))+"/"+video_id+"/<%= @playlist.id %>'>suggest track</a></div>";
                             $("#result").html(final); // Result
 
                         });
@@ -43,35 +84,37 @@ ajax/libs/jquery/1.4.2/jquery.min.js"></script>
                 }
             });
         });
+
+
     });
 </script>
-<h2>Track Liste - <%= @playlist.title%></h2>
-<h3><%= @playlist.beschreibung%></h3>
-<input type="text" class='search_input' placeholder="Search Youtube"/>
-<div id="result">
-</div>
-<% if current_user == @playlist.user %>
-    <p><%= link_to "Player", playmusic_path(@playlist) %></p>
+<div id="container1">
+  <div class="inner">
+    <h2>Track Liste - <%= @playlist.title%></h2>
+    <h3><%= @playlist.description%></h3>
+    <input type="text" class='search_input' placeholder="Search Youtube"/>
+    <div id="result">
     </div>
-<% end %>
+    <div id="tracklist">
+    </div>
+  </div> <!-- .inner -->
+</div> <!-- #container1 -->
 
+<div id="container2">
+  <div class="inner">
+    <h2>Top 5</h2>
+    <div id="top5">
+    </div>
+    <br />
+    <% if current_user == @playlist.user %>
+        <div id="moderator" style="background-color: #468847">
+          <h2>Moderator</h2>
+          <h3><%= link_to "Player", playmusic_path(@playlist) %></h3>
+          <div id="waitlist"></div>
+        </div>
+    <% end %>
+  </div> <!-- .inner -->
+</div> <!-- #container2 -->
 
-<table>
-  <tr>
-    <td>Title</td>
-    <td>votes</td>
-    <td>Links</td>
-  </tr>
-  <% @tracks.each do |track| %>
-      <tr>
-        <td><%= track.title %></td>
-        <td><%= track.votes %></td>
-        <% if VoteTrack.find_by_track_id_and_user_id(track.id, current_user.id) %>
-            <td><p>Already voted</p></td>
-        <% else %>
-            <td><%= link_to 'voting', voting_path(current_user, track)%></td>
-        <% end %>
+<div class="clear"> </div>
 
-      </tr>
-  <% end %>
-</table>

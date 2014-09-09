@@ -38,5 +38,6 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'devise'
-gem 'yourub', '~> 1.0.5'
-gem 'haml-rails', '>= 0.3.4', :group => :development
+group :development do
+  gem 'rails_layout'
+end

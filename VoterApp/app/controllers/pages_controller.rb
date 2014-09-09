@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
   end
-  def beitreten
+  def enter
 
   end
 end
