@@ -44,7 +44,7 @@ ajax/libs/jquery/1.4.2/jquery.min.js"></script>
                 }
             });
         }, 1000);
-
+        //http://www.socialengineforum.com/index.php?/topic/7346-advanced-video-browsing/
         $(".search_input").keyup(function()
         {
             var search_input = $(this).val();
@@ -72,7 +72,7 @@ ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
                             var final="<div id='title'>"+video_title+"</div><div>"+video_frame+"</div><div id='count'>"+video_viewCount+" Views</div>" +
                                     "<div id='suggest track'>" +
-                                    "<a href='/tracks/suggest/"+encodeURIComponent(video_title.substr(0,20))+"/"+video_id+"/<%= @playlist.id %>'>suggest track</a></div>";
+                                    "<a href='/tracks/suggest/"+encodeURIComponent(video_title.substr(0,25))+"/"+video_id+"/<%= @playlist.id %>'>suggest track</a></div>";
                             $("#result").html(final); // Result
 
                         });
@@ -106,7 +106,7 @@ ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <div id="top5">
     </div>
     <br />
-    <% if current_user == @playlist.user %>
+    <% if Moderator.find_by_playlist_id_and_user_id(@playlist.id, current_user.id) %>
         <div id="moderator" style="background-color: #468847">
           <h2>Moderator</h2>
           <h3><%= link_to "Player", playmusic_path(@playlist) %></h3>

@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910175855) do
+ActiveRecord::Schema.define(version: 20140910183229) do
 
   create_table "joined_users", force: true do |t|
-    t.integer  "user"
-    t.integer  "playlist"
+    t.integer  "user_id"
+    t.integer  "playlist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

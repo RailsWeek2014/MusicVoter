@@ -12,7 +12,7 @@ class PlaylistsController < ApplicationController
     if @playlist.nil?
       redirect_to :back, :flash => { :alert => "No Playlist with this Code" }
     end
-    j = JoinedUser.new(playlist: @playlist.id, user_id: current_user.id)
+    j = JoinedUser.new(playlist_id: @playlist.id, user_id: current_user.id)
     j.save
   end
 
@@ -29,7 +29,7 @@ class PlaylistsController < ApplicationController
   end
   def top5
     @playlist = Playlist.find(params[:id])
-    @tracks = @playlist.tracks.order(votes: :desc).where(accept: true)[1..5]
+    @tracks = @playlist.tracks.order(votes: :desc).where(accept: true)[0..4]
     render layout: false
   end
   # GET /playlists<<<<

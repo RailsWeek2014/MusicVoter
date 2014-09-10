@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
     <p><%= link_to "My Playlists", playlists_path %></p>
-    <p><%= link_to "Enter Playlist", playlists_enter_path %></p>
+    <p><%= link_to "Join Playlist", joined_path %></p>
     <p><%= link_to "Sign out", destroy_user_session_path %></p>
 <% else %>
     <p><%= link_to "Create User", new_user_registration_path %></p>

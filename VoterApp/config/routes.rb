@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :joined_users
-
   resources :moderators
 
   resources :vote_tracks
@@ -9,6 +7,7 @@ Rails.application.routes.draw do
   resources :track_votes
 
   resources :players
+  get "joined_users/joined" => "joined_users#joined", as: "joined"
 
   get "moderators/playlist_moderators/:playlist_id" => "moderators#playlist_moderators", as: "playlist_moderators"
   post "moderators/create" => "moderators#create"

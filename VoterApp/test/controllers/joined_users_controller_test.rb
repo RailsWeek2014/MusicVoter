@@ -18,7 +18,7 @@ class JoinedUsersControllerTest < ActionController::TestCase
 
   test "should create joined_user" do
     assert_difference('JoinedUser.count') do
-      post :create, joined_user: { playlist: @joined_user.playlist, user: @joined_user.user }
+      post :create, joined_user: { playlist_id: @joined_user.playlist_id, user_id: @joined_user.user_id }
     end
 
     assert_redirected_to joined_user_path(assigns(:joined_user))
@@ -35,7 +35,7 @@ class JoinedUsersControllerTest < ActionController::TestCase
   end
 
   test "should update joined_user" do
-    patch :update, id: @joined_user, joined_user: { playlist: @joined_user.playlist, user: @joined_user.user }
+    patch :update, id: @joined_user, joined_user: { playlist_id: @joined_user.playlist_id, user_id: @joined_user.user_id }
     assert_redirected_to joined_user_path(assigns(:joined_user))
   end
 
