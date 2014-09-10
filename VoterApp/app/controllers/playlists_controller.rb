@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
+  caches_page :waitlist, :tracklist, :top5
 
   #meine methoden
   def list_tracks
@@ -11,6 +12,8 @@ class PlaylistsController < ApplicationController
     if @playlist.nil?
       redirect_to :back, :flash => { :alert => "No Playlist with this Code" }
     end
+    j = JoinedUser.new(playlist: @playlist.id, user_id: current_user.id)
+    j.save
   end
 
   def waitlist

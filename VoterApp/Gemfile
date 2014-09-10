@@ -41,3 +41,5 @@ gem 'devise'
 group :development do
   gem 'rails_layout'
 end
+gem 'actionpack-page_caching'
+gem 'simple_form'

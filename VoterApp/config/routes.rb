@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
 
+  resources :joined_users
+
+  resources :moderators
+
   resources :vote_tracks
 
   resources :track_votes
 
   resources :players
+
+  get "moderators/playlist_moderators/:playlist_id" => "moderators#playlist_moderators", as: "playlist_moderators"
+  post "moderators/create" => "moderators#create"
+
 
   get "tracks/destroy/:id" => "tracks#destroy", as: "destroytrack"
 

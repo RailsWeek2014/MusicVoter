@@ -1,6 +1,5 @@
 class Playlist < ActiveRecord::Base
-  after_initialize :create_player
-
+  after_initialize :create_player_and_moderator
   belongs_to :user
   has_one :player
   has_many :tracks
@@ -9,9 +8,11 @@ class Playlist < ActiveRecord::Base
   validates :description, length: { maximum: 500, too_long: "Max. 500 Zeichen" }
 
   private
-  def create_player
+  def create_player_and_moderator
     player = Player.new()
     player.playlist = self
     player.save
+    m = Moderator.new(playlist_id: self.id, user_id: self.user.id)
+    m.save
   end
 end
