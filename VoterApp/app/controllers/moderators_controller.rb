@@ -35,10 +35,5 @@ class ModeratorsController < ApplicationController
     redirect_to :back, :flash => { :notice => "Moderator was successfully deleted"}
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_moderator
-      @moderator = Moderator.find(params[:id])
-    end
 
 end

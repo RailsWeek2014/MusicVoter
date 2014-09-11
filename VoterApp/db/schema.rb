@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20140910183229) do
   end
 
   create_table "players", force: true do |t|
+    t.boolean  "set_votes_to_null", default: false
+    t.integer  "dj_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "playlist_id"

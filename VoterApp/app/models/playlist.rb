@@ -11,6 +11,7 @@ class Playlist < ActiveRecord::Base
   def create_player_and_moderator
     player = Player.new()
     player.playlist = self
+    player.dj_id = self.user.id
     player.save
     m = Moderator.new()
     m.playlist_id = self.id

@@ -10,7 +10,15 @@
   <% @moderators.each do |moderator| %>
       <tr>
         <td><%= User.find(moderator.user_id).email %></td>
-        <td><%= link_to 'Delete', moderator, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <td> <%= link_to 'Delete', destroymoderator_path(moderator), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <td><% if @playlist.player.dj_id == moderator.user_id%>
+            This is the Playlist DJ
+            <%else%>
+          <%= link_to 'As DJ', set_dj_path(@playlist.id, moderator.user_id)%>
+              <% end%>
+
+
+              </td>
         </td>
       </tr>
   <% end %>

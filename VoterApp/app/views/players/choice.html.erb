@@ -1,0 +1,15 @@
+<%= form_tag(set_votes_path) do %>
+    <%= label_tag :choise %>
+    <% if @player.set_votes_to_null %>
+        <%= radio_button_tag :choise, 'to_null', :set_votes => true %> Set Votes to Null
+        <%= radio_button_tag :choise, 'delete' %> Delete Votes
+    <% else %>
+        <%= radio_button_tag :choise, 'to_null'  %> Set Votes to Null
+        <%= radio_button_tag :choise, 'delete' ,:set_votes => true%> Delete Votes
+    <% end %>
+
+    <%= hidden_field_tag :player_id, @player.id %>
+    <%= submit_tag("Set") %>
+<% end %>
+
+<%= link_to 'Back to Playlists', playlists_path %>
